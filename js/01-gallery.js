@@ -1,4 +1,52 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
+// console.log(galleryItems);
+
+const gallery = document.querySelector(".gallery");
+
+const itemGallery = `
+<div class="gallery__item">
+  <a class="gallery__link" href="large-image.jpg">
+    <img
+      class="gallery__image"
+      src="small-image.jpg"
+      data-source="large-image.jpg"
+      alt="Image description"
+    />
+  </a>
+</div>
+</li>`;
+
+galleryItems.forEach((item) => {
+  console.log(galleryItems);
+
+  gallery.insertAdjacentHTML("afterbegin", itemGallery);
+  const galleryImage = document.querySelector(".gallery__image");
+  const galleryLink = document.querySelector(".gallery__link");
+  galleryImage.src = item.preview;
+  galleryImage.dataset.source = item.original;
+  galleryImage.alt = item.description;
+  galleryLink.href = item.original;
+});
+
+
+
+gallery.addEventListener("click", (event) => {
+  event.preventDefault();
+  const target = event.target;
+  const galleryImage = document.querySelector(".gallery__image");
+  const img = document.querySelector(".gallery__image");
+const instance = basicLightbox.create(`
+  ${target.outerHTML.toString()};
+`)
+instance.show();
+});
+
+// document.querySelector('.gallery__image').onclick = () => {
+  
+// 	basicLightbox.create(`
+//   <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg" data-source="https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg" alt="Alpine Spring Meadows">
+// 	`).show()
+
+// }
