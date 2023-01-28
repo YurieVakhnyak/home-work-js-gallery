@@ -19,8 +19,6 @@ const itemGallery = `
 </li>`;
 
 galleryItems.forEach((item) => {
-  console.log(galleryItems);
-
   gallery.insertAdjacentHTML("afterbegin", itemGallery);
   const galleryImage = document.querySelector(".gallery__image");
   const galleryLink = document.querySelector(".gallery__link");
@@ -30,23 +28,20 @@ galleryItems.forEach((item) => {
   galleryLink.href = item.original;
 });
 
-
-
 gallery.addEventListener("click", (event) => {
   event.preventDefault();
   const target = event.target;
-  const galleryImage = document.querySelector(".gallery__image");
-  const img = document.querySelector(".gallery__image");
-const instance = basicLightbox.create(`
-  ${target.outerHTML.toString()};
-`)
-instance.show();
+  target.src = target.dataset.source;
+  // const galleryImage = document.querySelector(".gallery__image");
+
+  const instance = basicLightbox.create(`
+    ${target.outerHTML.toString()};  
+`);
+  instance.show();
+
+  document.addEventListener("keydown", function (event) {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  });
 });
-
-// document.querySelector('.gallery__image').onclick = () => {
-  
-// 	basicLightbox.create(`
-//   <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg" data-source="https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg" alt="Alpine Spring Meadows">
-// 	`).show()
-
-// }
